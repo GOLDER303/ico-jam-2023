@@ -9,12 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 15f;
     [SerializeField] float positionDistance = 5f;
 
-    public PlayerShapeSO currentPlayerShapeSO { private set; get; }
-
     private Rigidbody playerRigidBody;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private Vector3 targetPlayerPosition;
+    private PlayerShapeSO nextPlayerShapeSO;
 
     private void Awake()
     {
@@ -45,15 +44,16 @@ public class PlayerController : MonoBehaviour
         targetPlayerPosition.x = targetPlayerPosition.x + (inputVector.x * positionDistance);
     }
 
-    public IEnumerator ShapeChangeCoroutine(PlayerShapeSO nextPlayerShapeSO)
+    public void AssignNextShape(PlayerShapeSO nextPlayerShapeSO)
     {
-        //TODO: wait for some time (ex. 1 sec) and start particle system
+        //TODO: start particle system
 
-        yield return new WaitForSeconds(4);
+        this.nextPlayerShapeSO = nextPlayerShapeSO;
+    }
 
+    public void ChangeShape()
+    {
         meshFilter.mesh = nextPlayerShapeSO.mesh;
         meshRenderer.material = nextPlayerShapeSO.material;
-
-        currentPlayerShapeSO = nextPlayerShapeSO;
     }
 }

@@ -10,11 +10,7 @@ public class PlayerShapeChangeTrigger : MonoBehaviour
     {
         if (other.CompareTag("Obstacle"))
         {
-            Obstacle obstacle = other.GetComponent<Obstacle>();
-
-            PlayerShapeSO nextPlayerShapeSO = obstacle.fittingPlayerShapesSos[Random.Range(0, obstacle.fittingPlayerShapesSos.Count)];
-
-            StartCoroutine(playerController.ShapeChangeCoroutine(nextPlayerShapeSO));
+            playerController.ChangeShape();
         }
     }
 }

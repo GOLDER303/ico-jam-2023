@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b60806ca82083448a0d4b57331d54a, type: 3}
   m_Name: CircleHoleObstaclePartSO
   m_EditorClassIdentifier: 
-  mesh: {fileID: -7663182632813016647, guid: c7f29c2cc3d0756428485ef1f5a254f0, type: 3}
+  mesh: {fileID: -6632549484626855641, guid: c7f29c2cc3d0756428485ef1f5a254f0, type: 3}
   material: {fileID: 2100000, guid: 6b1942194b4139c4c816f4f465d860d4, type: 2}
   fittingPlayerShapeSO: {fileID: 11400000, guid: 8ece99382e5b3494ca17f57ff0caa672, type: 2}
