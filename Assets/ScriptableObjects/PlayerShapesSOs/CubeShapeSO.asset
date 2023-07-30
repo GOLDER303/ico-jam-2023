@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1d700a0ec8284041ac7894531822e21, type: 3}
-  m_Name: CylinderShapeSO
+  m_Name: CubeShapeSO
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 6fe8eb9bab9edfc47886a6a325bc2370, type: 2}

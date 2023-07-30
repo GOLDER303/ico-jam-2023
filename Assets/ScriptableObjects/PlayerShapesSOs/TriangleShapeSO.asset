@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d700a0ec8284041ac7894531822e21, type: 3}
   m_Name: TriangleShapeSO
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  mesh: {fileID: 2443237146360861554, guid: 895aacc35d36b4c41b16936ea3901078, type: 3}
+  material: {fileID: 2100000, guid: decc7c44f73afe54fbf0bee7aede2f7e, type: 2}

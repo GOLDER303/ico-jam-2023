@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b60806ca82083448a0d4b57331d54a, type: 3}
+  m_Name: SquareHoleObstaclePartSO
+  m_EditorClassIdentifier: 
+  mesh: {fileID: -4487711062959541568, guid: 4d9e8f36915ae944ba67d8d49cec1158, type: 3}
+  material: {fileID: 2100000, guid: 6fe8eb9bab9edfc47886a6a325bc2370, type: 2}
+  fittingPlayerShapeSO: {fileID: 11400000, guid: 5968ccada7737d3408eea00c0db72ce9, type: 2}
