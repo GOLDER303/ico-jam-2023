@@ -21,6 +21,7 @@ public class Obstacle : MonoBehaviour
 
             spawnedObstaclePart.GetComponent<MeshFilter>().mesh = obstaclePartSO.mesh;
             spawnedObstaclePart.GetComponent<MeshRenderer>().material = obstaclePartSO.material;
+            spawnedObstaclePart.GetComponent<ObstaclePart>().obstaclePartSO = obstaclePartSO;
 
             spawnedObstaclePart.transform.SetParent(transform);
 

@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int maxPositionsToSide = 1;
     [SerializeField] float moveSpeed = 15f;
     [SerializeField] float positionDistance = 5f;
+    [SerializeField] GameManager gameManager;
 
     private Rigidbody playerRigidBody;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private Vector3 targetPlayerPosition;
     private PlayerShapeSO nextPlayerShapeSO;
+    private PlayerShapeSO currentPlayerShapeSO;
     private ParticleSystem currentParticleSystem;
 
     private void Awake()
@@ -60,5 +62,18 @@ public class PlayerController : MonoBehaviour
 
         meshFilter.mesh = nextPlayerShapeSO.mesh;
         meshRenderer.material = nextPlayerShapeSO.material;
+
+        currentPlayerShapeSO = nextPlayerShapeSO;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ObstaclePart"))
+        {
+            if (other.GetComponent<ObstaclePart>().obstaclePartSO.fittingPlayerShapeSO != currentPlayerShapeSO)
+            {
+                gameManager.GameOver();
+            }
+        }
     }
 }
