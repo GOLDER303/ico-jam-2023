@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int maxPositionsToSide = 1;
     [SerializeField] float moveSpeed = 15f;
     [SerializeField] float positionDistance = 5f;
-    [SerializeField] PlayerShapeSO[] availablePlayerShapeSOs;
 
     public PlayerShapeSO currentPlayerShapeSO { private set; get; }
 
@@ -27,8 +26,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         targetPlayerPosition = transform.position;
-
-        StartCoroutine(ShapeChangeCoroutine());
     }
 
     private void Update()
@@ -48,18 +45,15 @@ public class PlayerController : MonoBehaviour
         targetPlayerPosition.x = targetPlayerPosition.x + (inputVector.x * positionDistance);
     }
 
-    private IEnumerator ShapeChangeCoroutine()
+    public IEnumerator ShapeChangeCoroutine(PlayerShapeSO nextPlayerShapeSO)
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(3);
+        //TODO: wait for some time (ex. 1 sec) and start particle system
 
-            PlayerShapeSO nextPlayerShapeSO = availablePlayerShapeSOs[Random.Range(0, availablePlayerShapeSOs.Length)];
+        yield return new WaitForSeconds(4);
 
-            meshFilter.mesh = nextPlayerShapeSO.mesh;
-            meshRenderer.material = nextPlayerShapeSO.material;
+        meshFilter.mesh = nextPlayerShapeSO.mesh;
+        meshRenderer.material = nextPlayerShapeSO.material;
 
-            currentPlayerShapeSO = nextPlayerShapeSO;
-        }
+        currentPlayerShapeSO = nextPlayerShapeSO;
     }
 }
