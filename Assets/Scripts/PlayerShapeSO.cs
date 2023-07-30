@@ -7,4 +7,5 @@ public class PlayerShapeSO : ScriptableObject
 {
     public Mesh mesh;
     public Material material;
+    public ParticleSystem particleSystem;
 }

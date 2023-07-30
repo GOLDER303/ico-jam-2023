@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Vector3 targetPlayerPosition;
     private PlayerShapeSO nextPlayerShapeSO;
+    private ParticleSystem currentParticleSystem;
 
     private void Awake()
     {
@@ -46,13 +47,17 @@ public class PlayerController : MonoBehaviour
 
     public void AssignNextShape(PlayerShapeSO nextPlayerShapeSO)
     {
-        //TODO: start particle system
+        currentParticleSystem = Instantiate(nextPlayerShapeSO.particleSystem, transform.position, Quaternion.identity);
+
+        currentParticleSystem.transform.SetParent(transform);
 
         this.nextPlayerShapeSO = nextPlayerShapeSO;
     }
 
     public void ChangeShape()
     {
+        Destroy(currentParticleSystem.gameObject);
+
         meshFilter.mesh = nextPlayerShapeSO.mesh;
         meshRenderer.material = nextPlayerShapeSO.material;
     }

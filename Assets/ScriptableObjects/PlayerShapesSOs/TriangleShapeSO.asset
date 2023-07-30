@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 2443237146360861554, guid: 895aacc35d36b4c41b16936ea3901078, type: 3}
   material: {fileID: 2100000, guid: decc7c44f73afe54fbf0bee7aede2f7e, type: 2}
+  particleSystem: {fileID: 6010248442212953713, guid: 7ec880a563222dc4e976b808150bcf42, type: 3}
