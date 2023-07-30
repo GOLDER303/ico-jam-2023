@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRigidBody;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
+    private PlayerInput playerInput;
     private Vector3 targetPlayerPosition;
     private PlayerShapeSO nextPlayerShapeSO;
     private PlayerShapeSO currentPlayerShapeSO;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         playerRigidBody = GetComponent<Rigidbody>();
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -72,6 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             if (other.GetComponent<ObstaclePart>().obstaclePartSO.fittingPlayerShapeSO != currentPlayerShapeSO)
             {
+                playerInput.DeactivateInput();
                 gameManager.GameOver();
             }
         }
