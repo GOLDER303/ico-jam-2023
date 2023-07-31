@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float positionDistance = 5f;
     [SerializeField] GameManager gameManager;
     [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] private CountdownManager countdownManager;
 
     public Queue<PlayerShapeSO> playerShapeChangeQueue { get; } = new Queue<PlayerShapeSO>();
 
@@ -92,11 +93,11 @@ public class PlayerController : MonoBehaviour
 
     private void StartParticleSystem(ParticleSystem particleSystem)
     {
-        // Start Timer with current spawn delay
-
         currentParticleSystem = Instantiate(particleSystem, transform.position, Quaternion.identity);
 
         currentParticleSystem.transform.SetParent(transform);
+
+        StartCoroutine(countdownManager.StartCountdown(gameManager.currentSpawnDelay));
     }
 
     private void OnTriggerEnter(Collider other)

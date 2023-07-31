@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float spawnDelayDecreasingRate = .1f;
     [SerializeField] private float minSpawnDelay = .7f;
 
+    public float currentSpawnDelay => obstacleSpawner.spawnDelay;
+
     private float score;
     private bool gameOver = false;
 
