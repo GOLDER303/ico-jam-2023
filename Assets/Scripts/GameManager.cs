@@ -9,9 +9,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject inGameUI;
+    [SerializeField] private float scoreGrowthRate = 5f;
 
     private float score;
-    private float scoreGrowthRate = 10f;
 
     private void Update()
     {
@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
+        gameOverScreen.GetComponent<GameOverScreen>().Setup(Mathf.FloorToInt(score));
+
         inGameUI.SetActive(false);
     }
 
