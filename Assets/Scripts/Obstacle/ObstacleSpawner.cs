@@ -5,11 +5,13 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private Obstacle[] obstaclePrefabs;
-    [SerializeField] private float spawnDelay = 1f;
+    [SerializeField] private float initialSpawnDelay = 2f;
 
+    public float spawnDelay { get; set; }
 
     private void Start()
     {
+        spawnDelay = initialSpawnDelay;
         StartCoroutine(SpawnObstacleCoroutine());
     }
 
