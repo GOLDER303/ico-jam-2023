@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameManager gameManager;
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] private CountdownManager countdownManager;
+    [SerializeField] private AudioClip obstaclePassSFX;
 
     public Queue<PlayerShapeSO> playerShapeChangeQueue { get; } = new Queue<PlayerShapeSO>();
 
@@ -21,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private PlayerInput playerInput;
+    private AudioSource audioSource;
+
     private Vector3 targetPlayerPosition;
     private PlayerShapeSO currentPlayerShapeSO;
     private ParticleSystem currentParticleSystem;
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
         playerInput = GetComponent<PlayerInput>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -111,6 +115,8 @@ public class PlayerController : MonoBehaviour
                 Destroy(gameObject);
                 OnPlayerDeath?.Invoke();
             }
+
+            audioSource.PlayOneShot(obstaclePassSFX, .5f);
         }
     }
 }
