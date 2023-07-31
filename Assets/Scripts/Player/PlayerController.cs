@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static Action OnPlayerDeath;
+
     [SerializeField] int maxPositionsToSide = 1;
     [SerializeField] float moveSpeed = 15f;
     [SerializeField] float positionDistance = 5f;
     [SerializeField] GameManager gameManager;
+    [SerializeField] ParticleSystem deathParticles;
 
     public Queue<PlayerShapeSO> playerShapeChangeQueue { get; } = new Queue<PlayerShapeSO>();
 
@@ -100,7 +104,9 @@ public class PlayerController : MonoBehaviour
             if (other.GetComponent<ObstaclePart>().obstaclePartSO.fittingPlayerShapeSO != currentPlayerShapeSO)
             {
                 playerInput.DeactivateInput();
-                gameManager.GameOver();
+                Instantiate(deathParticles, transform.position, Quaternion.identity);
+                Destroy(gameObject);
+                OnPlayerDeath?.Invoke();
             }
         }
     }

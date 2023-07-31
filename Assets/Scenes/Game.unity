@@ -277,6 +277,7 @@ MonoBehaviour:
   moveSpeed: 35
   positionDistance: 3.5
   gameManager: {fileID: 682296249}
+  deathParticles: {fileID: 565891468784330729, guid: 0b200a813aaad1a46a62b1ec741a847c, type: 3}
 --- !u!54 &79722516
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -17,6 +17,16 @@ public class GameManager : MonoBehaviour
     private float score;
     private bool gameOver = false;
 
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerDeath += GameOver;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerDeath -= GameOver;
+    }
+
     private void Update()
     {
         score += (scoreGrowthRate * Time.deltaTime);

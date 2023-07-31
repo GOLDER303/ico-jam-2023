@@ -9,15 +9,32 @@ public class ObstacleSpawner : MonoBehaviour
 
     public float spawnDelay { get; set; }
 
+    private bool shouldSpawn = true;
+
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
     private void Start()
     {
         spawnDelay = initialSpawnDelay;
         StartCoroutine(SpawnObstacleCoroutine());
     }
 
+    private void HandlePlayerDeath()
+    {
+        shouldSpawn = false;
+    }
+
     private IEnumerator SpawnObstacleCoroutine()
     {
-        while (true)
+        while (shouldSpawn)
         {
             Obstacle spawnedObstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnDelay);
