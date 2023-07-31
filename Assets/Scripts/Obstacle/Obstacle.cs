@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    public static Action<PlayerShapeSO> OnObstacleSpawn;
+
     [SerializeField] private Vector3[] obstaclePartsPositions;
     [SerializeField] private ObstaclePartSO[] obstaclePartsSOs;
     [SerializeField] private GameObject obstaclePartPrefab;
@@ -15,7 +18,7 @@ public class Obstacle : MonoBehaviour
     {
         for (int i = 0; i < obstaclePartsPositions.Length; i++)
         {
-            ObstaclePartSO obstaclePartSO = obstaclePartsSOs[Random.Range(0, obstaclePartsSOs.Length)];
+            ObstaclePartSO obstaclePartSO = obstaclePartsSOs[UnityEngine.Random.Range(0, obstaclePartsSOs.Length)];
 
             GameObject spawnedObstaclePart = Instantiate(obstaclePartPrefab, obstaclePartsPositions[i] + transform.position, Quaternion.identity);
 
@@ -27,13 +30,15 @@ public class Obstacle : MonoBehaviour
 
             fittingPlayerShapesSos.Add(obstaclePartSO.fittingPlayerShapeSO);
         }
+
+        OnObstacleSpawn?.Invoke(fittingPlayerShapesSos[UnityEngine.Random.Range(0, fittingPlayerShapesSos.Count)]);
     }
 
     private void Update()
     {
         transform.Translate(Vector3.back * moveSpeed * Time.deltaTime);
 
-        if(transform.position.z < -10f)
+        if (transform.position.z < -10f)
         {
             Destroy(gameObject);
         }

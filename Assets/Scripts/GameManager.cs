@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject inGameUI;
     [SerializeField] private float scoreGrowthRate = 5f;
     [SerializeField] private ObstacleSpawner obstacleSpawner;
-    [SerializeField] private float spawnDelayDecreasingRate = .2f;
-    [SerializeField] private float minSpawnDelay = .5f;
+    [SerializeField] private float spawnDelayDecreasingRate = .1f;
+    [SerializeField] private float minSpawnDelay = .7f;
 
     private float score;
     private bool gameOver = false;

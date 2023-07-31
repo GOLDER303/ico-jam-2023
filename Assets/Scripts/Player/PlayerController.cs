@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float positionDistance = 5f;
     [SerializeField] GameManager gameManager;
 
+    public Queue<PlayerShapeSO> playerShapeChangeQueue { get; } = new Queue<PlayerShapeSO>();
+
     private Rigidbody playerRigidBody;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
     private PlayerInput playerInput;
     private Vector3 targetPlayerPosition;
-    private PlayerShapeSO nextPlayerShapeSO;
     private PlayerShapeSO currentPlayerShapeSO;
     private ParticleSystem currentParticleSystem;
 
@@ -30,6 +31,15 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         targetPlayerPosition = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        Obstacle.OnObstacleSpawn += AddShapeChangeToQueue;
+    }
+    private void OnDisable()
+    {
+        Obstacle.OnObstacleSpawn += AddShapeChangeToQueue;
     }
 
     private void Update()
@@ -49,23 +59,38 @@ public class PlayerController : MonoBehaviour
         targetPlayerPosition.x = targetPlayerPosition.x + (inputVector.x * positionDistance);
     }
 
-    public void AssignNextShape(PlayerShapeSO nextPlayerShapeSO)
+    private void AddShapeChangeToQueue(PlayerShapeSO nextPlayerShapeSO)
     {
-        currentParticleSystem = Instantiate(nextPlayerShapeSO.particleSystem, transform.position, Quaternion.identity);
+        if (playerShapeChangeQueue.Count == 0)
+        {
+            StartParticleSystem(nextPlayerShapeSO.particleSystem);
+        }
 
-        currentParticleSystem.transform.SetParent(transform);
-
-        this.nextPlayerShapeSO = nextPlayerShapeSO;
+        playerShapeChangeQueue.Enqueue(nextPlayerShapeSO);
     }
 
     public void ChangeShape()
     {
         Destroy(currentParticleSystem.gameObject);
 
+        PlayerShapeSO nextPlayerShapeSO = playerShapeChangeQueue.Dequeue();
+
         meshFilter.mesh = nextPlayerShapeSO.mesh;
         meshRenderer.material = nextPlayerShapeSO.material;
 
         currentPlayerShapeSO = nextPlayerShapeSO;
+
+        if (playerShapeChangeQueue.Count > 0)
+        {
+            StartParticleSystem(playerShapeChangeQueue.Peek().particleSystem);
+        }
+    }
+
+    private void StartParticleSystem(ParticleSystem particleSystem)
+    {
+        currentParticleSystem = Instantiate(particleSystem, transform.position, Quaternion.identity);
+
+        currentParticleSystem.transform.SetParent(transform);
     }
 
     private void OnTriggerEnter(Collider other)
