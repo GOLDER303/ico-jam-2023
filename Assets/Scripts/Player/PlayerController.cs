@@ -92,6 +92,8 @@ public class PlayerController : MonoBehaviour
 
     private void StartParticleSystem(ParticleSystem particleSystem)
     {
+        // Start Timer with current spawn delay
+
         currentParticleSystem = Instantiate(particleSystem, transform.position, Quaternion.identity);
 
         currentParticleSystem.transform.SetParent(transform);

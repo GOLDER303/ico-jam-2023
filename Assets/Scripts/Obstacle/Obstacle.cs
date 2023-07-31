@@ -14,6 +14,21 @@ public class Obstacle : MonoBehaviour
 
     public List<PlayerShapeSO> fittingPlayerShapesSos { get; } = new List<PlayerShapeSO>();
 
+    private void OnEnable()
+    {
+        PlayerController.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.OnPlayerDeath -= HandlePlayerDeath;
+    }
+
+    private void HandlePlayerDeath()
+    {
+        Destroy(gameObject);
+    }
+
     public void Start()
     {
         for (int i = 0; i < obstaclePartsPositions.Length; i++)
